@@ -1,14 +1,15 @@
-package http_work.util;
+package http_work.http_util;
+
+import http_work.IncorrectInputException;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HttpStatusImageDownloader {
 
     private static final HttpStatusChecker HTTP_STATUS_CHECKER = new HttpStatusChecker();
 
-    void downloadStatusImage(int code) {
+    void downloadStatusImage(int code) throws IncorrectInputException {
 
         String uri = HTTP_STATUS_CHECKER.getStatusImage(code);
 
@@ -20,7 +21,7 @@ public class HttpStatusImageDownloader {
             dir.mkdir();
 
             String fileName = "Cat" + code + ".jpg";
-            String fileDestinationFolder = "../http_work/Cat_Images";
+            String fileDestinationFolder = "../http_work/Cat_Images/";
 
             InputStream inputStream = url.openStream();
             OutputStream outputStream = new FileOutputStream(fileDestinationFolder + fileName);
@@ -36,7 +37,7 @@ public class HttpStatusImageDownloader {
 
             System.out.println("The image of cat with code " + code + " was downloaded");
 
-        } catch (IOException e) {
+        } catch ( IOException e) {
             throw new RuntimeException(e);
         }
     }

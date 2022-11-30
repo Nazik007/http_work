@@ -1,4 +1,6 @@
-package http_work.util;
+package http_work.http_util;
+
+import http_work.IncorrectInputException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,7 +14,7 @@ public class HttpStatusChecker {
 
     private static final HttpClient CLIENT = HttpClient.newHttpClient();
 
-    public String getStatusImage(int code)  {
+    public String getStatusImage(int code) throws IncorrectInputException {
         StringBuilder response = new StringBuilder();
 
         try {
@@ -28,14 +30,14 @@ public class HttpStatusChecker {
             int responseCode = send.statusCode();
 
             if (responseCode != 200) {
-                throw new InputMismatchException("No image for this HTTP status " + code);
+                throw new IncorrectInputException("No image for this HTTP status " + code);
             }else {
                 response.append(send.uri());
             }
 
 
         } catch (URISyntaxException | IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return response.toString();
     }

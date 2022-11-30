@@ -1,4 +1,6 @@
-package http_work.util;
+package http_work.http_util;
+
+import http_work.IncorrectInputException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,13 +12,13 @@ public class HttpImageStatusCli {
 
    public void askStatus() {
        try (Scanner scanner  = new Scanner(System.in)) {
-           System.out.println("Please, type in the HTTP status code");
+           System.out.println("Please, type in the HTTP status code: ");
 
            int code = 0;
            try {
-               code =scanner.nextInt();
+               code = scanner.nextInt();
            }catch (InputMismatchException ex) {
-               System.err.println("Please, enter a valid status number");
+               System.err.println("Please, enter a valid status number: ");
                HTTP_IMAGE_STATUS_CLI.askStatus();
            }
 
@@ -25,6 +27,8 @@ public class HttpImageStatusCli {
 
        }catch (InputMismatchException ex) {
            ex.printStackTrace();
+       } catch (IncorrectInputException e) {
+           throw new RuntimeException(e);
        }
    }
 
