@@ -9,11 +9,10 @@ public class HttpStatusImageDownloader {
 
     private static final HttpStatusChecker HTTP_STATUS_CHECKER = new HttpStatusChecker();
 
-    void downloadStatusImage(int code) throws IncorrectInputException {
-
-        String uri = HTTP_STATUS_CHECKER.getStatusImage(code);
+    public void downloadStatusImage(int code) {
 
         try {
+            String uri = HTTP_STATUS_CHECKER.getStatusImage(code);
 
             URL url = new URL(uri);
 
@@ -26,7 +25,7 @@ public class HttpStatusImageDownloader {
             InputStream inputStream = url.openStream();
             OutputStream outputStream = new FileOutputStream(fileDestinationFolder + fileName);
 
-            byte [] buffer = new byte[2048];
+            byte[] buffer = new byte[2048];
             int length;
 
             while ((length = inputStream.read(buffer)) != -1) {
@@ -35,10 +34,10 @@ public class HttpStatusImageDownloader {
             inputStream.close();
             outputStream.close();
 
-            System.out.println("The image of cat with code " + code + " was downloaded");
+            System.out.println("Cat with code " + code + " was downloaded");
 
-        } catch ( IOException e) {
-            throw new RuntimeException(e);
+        } catch (IncorrectInputException | IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

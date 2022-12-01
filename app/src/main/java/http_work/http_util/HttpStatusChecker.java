@@ -13,7 +13,6 @@ import java.util.InputMismatchException;
 public class HttpStatusChecker {
 
     private static final HttpClient CLIENT = HttpClient.newHttpClient();
-
     public String getStatusImage(int code) throws IncorrectInputException {
         StringBuilder response = new StringBuilder();
 
@@ -29,14 +28,13 @@ public class HttpStatusChecker {
 
             int responseCode = send.statusCode();
 
-            if (responseCode != 200) {
-                throw new IncorrectInputException("No image for this HTTP status " + code);
-            }else {
+            if(responseCode != 200){
+                throw new IncorrectInputException("There is not image for HTTP status " + code);
+            } else {
                 response.append(send.uri());
             }
 
-
-        } catch (URISyntaxException | IOException | InterruptedException e) {
+        } catch (URISyntaxException | InterruptedException | IOException e) {
             e.printStackTrace();
         }
         return response.toString();

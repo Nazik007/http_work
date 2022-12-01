@@ -3,10 +3,11 @@
  */
 package http_work.main;
 
+import http_work.IncorrectInputException;
 import http_work.http_util.HttpImageStatusCli;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IncorrectInputException {
         new HttpImageStatusCli().askStatus();
     }
 }
