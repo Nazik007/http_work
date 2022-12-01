@@ -20,7 +20,7 @@ public class HttpStatusImageDownloader {
             dir.mkdir();
 
             String fileName = "Cat" + code + ".jpg";
-            String fileDestinationFolder = "../http_work/Cat_Images/";
+            String fileDestinationFolder = "./Cat_Images/";
 
             InputStream inputStream = url.openStream();
             OutputStream outputStream = new FileOutputStream(fileDestinationFolder + fileName);

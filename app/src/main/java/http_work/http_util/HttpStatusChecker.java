@@ -29,7 +29,7 @@ public class HttpStatusChecker {
             int responseCode = send.statusCode();
 
             if(responseCode != 200){
-                throw new IncorrectInputException("There is not image for HTTP status " + code);
+                throw new IncorrectInputException("There is no image for HTTP status " + code);
             } else {
                 response.append(send.uri());
             }
